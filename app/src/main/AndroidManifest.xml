@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Group2racinggame"
         tools:targetApi="31">
+
         <activity
             android:name=".ResultPageActivity"
             android:exported="false" />
@@ -29,16 +30,15 @@
             android:exported="false" />
         <activity
             android:name=".LoginPageActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

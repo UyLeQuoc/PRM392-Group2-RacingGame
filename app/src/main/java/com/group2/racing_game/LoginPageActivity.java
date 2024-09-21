@@ -1,6 +1,9 @@
 package com.group2.racing_game;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class LoginPageActivity extends AppCompatActivity {
+    Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +24,20 @@ public class LoginPageActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        RefElement();
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myItent = new Intent(LoginPageActivity.this, MainActivity.class);
+                startActivity(myItent);
+            }
+        });
+
+    }
+
+    protected void RefElement(){
+        btnLogin = (Button) findViewById(R.id.btnLogin);
     }
 }
