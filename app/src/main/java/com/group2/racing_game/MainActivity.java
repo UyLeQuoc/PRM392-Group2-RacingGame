@@ -63,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
         seekBar3 = findViewById(R.id.seekBar3);
         seekBar4 = findViewById(R.id.seekBar4);
         seekBar5 = findViewById(R.id.seekBar5);
+
+        seekBar1.setEnabled(false);
+        seekBar2.setEnabled(false);
+        seekBar3.setEnabled(false);
+        seekBar4.setEnabled(false);
+        seekBar5.setEnabled(false);
     }
 
     // Start the race
