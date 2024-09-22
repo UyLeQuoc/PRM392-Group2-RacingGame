@@ -14,7 +14,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     private final Handler handler = new Handler();
     private final Random random = new Random();
-    Button btnLogout;
+    Button btnLogout, btnStart, btnReset;
     SeekBar seekBar1, seekBar2, seekBar3, seekBar4, seekBar5;
     private boolean raceRunning = false;
 
@@ -34,28 +34,54 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Handle Start button
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!raceRunning) {
+                    startRace();
+                }
+            }
+        });
 
-        // Initialize seekbars
+        // Handle Reset button
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetRace();
+            }
+        });
+    }
+
+    protected void RefElement() {
+        btnLogout = findViewById(R.id.btnLogout);
+        btnStart = findViewById(R.id.btnStart);
+        btnReset = findViewById(R.id.btnReset);
+
         seekBar1 = findViewById(R.id.seekBar1);
         seekBar2 = findViewById(R.id.seekBar2);
         seekBar3 = findViewById(R.id.seekBar3);
         seekBar4 = findViewById(R.id.seekBar4);
         seekBar5 = findViewById(R.id.seekBar5);
-
-
-        // Start race
-        startRace();
     }
 
-    protected void RefElement() {
-        btnLogout = findViewById(R.id.btnLogout);
-    }
-
+    // Start the race
     private void startRace() {
         if (!raceRunning) {
             raceRunning = true;
             updateSeekBarProgress();
         }
+    }
+
+    // Reset the race
+    private void resetRace() {
+        seekBar1.setProgress(0);
+        seekBar2.setProgress(0);
+        seekBar3.setProgress(0);
+        seekBar4.setProgress(0);
+        seekBar5.setProgress(0);
+
+        raceRunning = false;
     }
 
     private void updateSeekBarProgress() {
