@@ -1,10 +1,12 @@
 package com.group2.racing_game;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -13,10 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.group2.racing_game.DAO.UserDAO;
 import com.group2.racing_game.entity.User;
 
+import com.bumptech.glide.Glide;
+
 public class LoginPageActivity extends AppCompatActivity {
     Button btnLogin;
     EditText txtUsername, txtPassword;
     UserDAO userDAO = UserDAO.getInstance();
+    ImageView gifBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +37,25 @@ public class LoginPageActivity extends AppCompatActivity {
                 performLogin();
             }
         });
+
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.doodle);
+
+
+
+        Glide.with(this)
+                .asGif()
+                .load(R.drawable.game_background)
+                .into(gifBackground);
+
+        mediaPlayer.start();
+
     }
 
     protected void RefElement(){
         btnLogin = (Button) findViewById(R.id.btnLogin);
         txtUsername = (EditText) findViewById(R.id.txtUsername);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
+        gifBackground = (ImageView)findViewById(R.id.gifBackground);
     }
 
     // Function to handle login
