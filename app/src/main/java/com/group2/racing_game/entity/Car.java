@@ -3,18 +3,18 @@ package com.group2.racing_game.entity;
 public class Car {
     private int id;
     private String name;
-    private String icon;
+    private int icon;
     private double minSpeed;
     private double maxSpeed;
-    private double rating;
+    private double rate;
 
-    public Car(int id, String name, String icon, double minSpeed, double maxSpeed, double rating) {
+    public Car(int id, String name, int icon, double minSpeed, double maxSpeed, double rate) {
         this.id = id;
         this.name = name;
         this.icon = icon;
         this.minSpeed = minSpeed;
         this.maxSpeed = maxSpeed;
-        this.rating = rating;
+        this.rate = rate;
     }
 
     public int getId() {
@@ -33,11 +33,11 @@ public class Car {
         this.name = name;
     }
 
-    public String getIcon() {
+    public int getIcon() {
         return icon;
     }
 
-    public void setIcon(String icon) {
+    public void setIcon(int icon) {
         this.icon = icon;
     }
 
@@ -57,11 +57,11 @@ public class Car {
         this.maxSpeed = maxSpeed;
     }
 
-    public double getRating() {
-        return rating;
+    public double getRate() {
+        return rate;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setRate(double rate) {
+        this.rate = rate;
     }
 }
