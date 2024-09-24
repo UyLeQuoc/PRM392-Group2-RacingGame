@@ -22,6 +22,7 @@ public class LoginPageActivity extends AppCompatActivity {
     EditText txtUsername, txtPassword;
     UserDAO userDAO = UserDAO.getInstance();
     ImageView gifBackground;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +39,13 @@ public class LoginPageActivity extends AppCompatActivity {
             }
         });
 
-        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.doodle);
+//        Glide.with(this)
+//                .asGif()
+//                .load(R.drawable.game_background)
+//                .into(gifBackground);
 
-
-
-        Glide.with(this)
-                .asGif()
-                .load(R.drawable.game_background)
-                .into(gifBackground);
-
+        mediaPlayer = MediaPlayer.create(this, R.raw.doodle);
+        mediaPlayer.setLooping(true);
         mediaPlayer.start();
 
     }
@@ -55,7 +54,7 @@ public class LoginPageActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         txtUsername = (EditText) findViewById(R.id.txtUsername);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
-        gifBackground = (ImageView)findViewById(R.id.gifBackground);
+//        gifBackground = (ImageView)findViewById(R.id.gifBackground);
     }
 
     // Function to handle login
@@ -77,6 +76,32 @@ public class LoginPageActivity extends AppCompatActivity {
         } else {
             // Invalid credentials, show error message
             Toast.makeText(LoginPageActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();  // Pause MediaPlayer when activity is paused
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+            mediaPlayer.start();  // Resume MediaPlayer when activity is resumed
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();     // Stop MediaPlayer when activity is destroyed
+            mediaPlayer.release();  // Release resources when no longer needed
+            mediaPlayer = null;
         }
     }
 }

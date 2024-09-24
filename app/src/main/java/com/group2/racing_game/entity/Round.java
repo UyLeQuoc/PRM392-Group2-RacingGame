@@ -4,7 +4,7 @@ public class Round {
     private int id;
     private Car carWin;
 
-    public Round(Car carWin, int id) {
+    public Round(int id,Car carWin) {
         this.carWin = carWin;
         this.id = id;
     }
