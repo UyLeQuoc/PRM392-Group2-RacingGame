@@ -1,21 +1,34 @@
 package com.group2.racing_game;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.InputType;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.group2.racing_game.DAO.CarDAO;
+import com.group2.racing_game.entity.Car;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private final Handler handler = new Handler();
     private final Random random = new Random();
+    private List<SeekBar> seekBars = new ArrayList<>();
+    private LinearLayout seekbarContainer;
     Button btnLogout, btnStart, btnReset;
-    SeekBar seekBar1, seekBar2, seekBar3, seekBar4, seekBar5;
     private boolean raceRunning = false;
 
     @Override
@@ -24,52 +37,48 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        RefElement();
-
-        // Handle logout button
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-        // Handle Start button
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!raceRunning) {
-                    startRace();
-                }
-            }
-        });
-
-        // Handle Reset button
-        btnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                resetRace();
-            }
-        });
-    }
-
-    protected void RefElement() {
+        seekbarContainer = findViewById(R.id.seekbarContainer);
         btnLogout = findViewById(R.id.btnLogout);
         btnStart = findViewById(R.id.btnStart);
         btnReset = findViewById(R.id.btnReset);
 
-        seekBar1 = findViewById(R.id.seekBar1);
-        seekBar2 = findViewById(R.id.seekBar2);
-        seekBar3 = findViewById(R.id.seekBar3);
-        seekBar4 = findViewById(R.id.seekBar4);
-        seekBar5 = findViewById(R.id.seekBar5);
+        // Dynamically add SeekBars based on the data from CarDAO
+        addSeekBars();
 
-        seekBar1.setEnabled(false);
-        seekBar2.setEnabled(false);
-        seekBar3.setEnabled(false);
-        seekBar4.setEnabled(false);
-        seekBar5.setEnabled(false);
+        btnLogout.setOnClickListener(view -> finish());
+        btnStart.setOnClickListener(view -> {
+            if (!raceRunning) {
+                startRace();
+            }
+        });
+        btnReset.setOnClickListener(view -> resetRace());
     }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private void addSeekBars() {
+        List<Car> cars = CarDAO.getInstance().getCarList();
+        LayoutInflater inflater = LayoutInflater.from(this);
+
+        for (Car car : cars) {
+            // Inflate the custom layout
+            View seekbarItem = inflater.inflate(R.layout.item_seekbar, seekbarContainer, false);
+
+            // Find the views inside the custom layout
+            CheckBox checkBox = seekbarItem.findViewById(R.id.checkBox);
+            SeekBar seekBar = seekbarItem.findViewById(R.id.seekBar);
+            EditText betAmount = seekbarItem.findViewById(R.id.editTextNumber);
+
+            // Set the thumb drawable for the SeekBar based on the car data
+            seekBar.setThumb(getResources().getDrawable(car.getIcon(), null));
+
+            // Add the inflated view to the container
+            seekbarContainer.addView(seekbarItem);
+
+            // Add seekbar to the list for later reference
+            seekBars.add(seekBar);
+        }
+    }
+
 
     // Start the race
     private void startRace() {
@@ -81,44 +90,43 @@ public class MainActivity extends AppCompatActivity {
 
     // Reset the race
     private void resetRace() {
-        seekBar1.setProgress(0);
-        seekBar2.setProgress(0);
-        seekBar3.setProgress(0);
-        seekBar4.setProgress(0);
-        seekBar5.setProgress(0);
-
+        for (SeekBar seekBar : seekBars) {
+            seekBar.setProgress(0);
+        }
         raceRunning = false;
     }
 
     private void updateSeekBarProgress() {
+        List<Car> cars = CarDAO.getInstance().getCarList();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                boolean raceFinished = true;
 
-                if (seekBar1.getProgress() < seekBar1.getMax()) {
-                    seekBar1.setProgress(seekBar1.getProgress() + random.nextInt(5) + 1);
-                }
-                if (seekBar2.getProgress() < seekBar2.getMax()) {
-                    seekBar2.setProgress(seekBar2.getProgress() + random.nextInt(5) + 1);
-                }
-                if (seekBar3.getProgress() < seekBar3.getMax()) {
-                    seekBar3.setProgress(seekBar3.getProgress() + random.nextInt(5) + 1);
-                }
-                if (seekBar4.getProgress() < seekBar4.getMax()) {
-                    seekBar4.setProgress(seekBar4.getProgress() + random.nextInt(5) + 1);
-                }
-                if (seekBar5.getProgress() < seekBar5.getMax()) {
-                    seekBar5.setProgress(seekBar5.getProgress() + random.nextInt(5) + 1);
+                for (int i = 0; i < seekBars.size(); i++) {
+                    SeekBar seekBar = seekBars.get(i);
+                    Car car = cars.get(i);
+
+                    if (seekBar.getProgress() < seekBar.getMax()) {
+                        // Calculate a random progress
+                        double randomSpeed = car.getMinSpeed() + (random.nextDouble() * (car.getMaxSpeed() - car.getMinSpeed()));
+
+                        // Update SeekBar progress
+                        int newProgress = seekBar.getProgress() + (int) Math.round(randomSpeed);
+                        seekBar.setProgress(newProgress);
+
+                        // Keep the race going
+                        if (seekBar.getProgress() < seekBar.getMax()) {
+                            raceFinished = false;
+                        }
+                    }
                 }
 
-                // Continue updating until all seekbars are complete
-                if (seekBar1.getProgress() < seekBar1.getMax() || seekBar2.getProgress() < seekBar2.getMax() || seekBar3.getProgress() < seekBar3.getMax() || seekBar4.getProgress() < seekBar4.getMax() || seekBar5.getProgress() < seekBar5.getMax()) {
-
-                    // Update every ms
+                // Continue updating if the race hasn't finished
+                if (!raceFinished) {
                     handler.postDelayed(this, 100);
                 } else {
-                    // Stop the race
-                    raceRunning = false;
+                    raceRunning = false; // Race finished
                 }
             }
         }, 100);
