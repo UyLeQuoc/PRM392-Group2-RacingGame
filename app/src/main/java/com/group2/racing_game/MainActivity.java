@@ -42,8 +42,11 @@ public class MainActivity extends AppCompatActivity {
         btnStart = findViewById(R.id.btnStart);
         btnReset = findViewById(R.id.btnReset);
 
-        // Dynamically add SeekBars based on the data from CarDAO
+        // Add SeekBars from CarDAO
         addSeekBars();
+
+        // Initially disable the Reset button
+        btnReset.setEnabled(false);
 
         btnLogout.setOnClickListener(view -> finish());
         btnStart.setOnClickListener(view -> {
@@ -68,13 +71,16 @@ public class MainActivity extends AppCompatActivity {
             SeekBar seekBar = seekbarItem.findViewById(R.id.seekBar);
             EditText betAmount = seekbarItem.findViewById(R.id.editTextNumber);
 
-            // Set the thumb drawable for the SeekBar based on the car data
+            // Set the thumb drawable for the SeekBar
             seekBar.setThumb(getResources().getDrawable(car.getIcon(), null));
+
+            // Disable the SeekBar
+            seekBar.setEnabled(false);
 
             // Add the inflated view to the container
             seekbarContainer.addView(seekbarItem);
 
-            // Add seekbar to the list for later reference
+            // Add seekbar to the list
             seekBars.add(seekBar);
         }
     }
@@ -84,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
     private void startRace() {
         if (!raceRunning) {
             raceRunning = true;
+
+            btnStart.setEnabled(false);
+            btnReset.setEnabled(false);
+
             updateSeekBarProgress();
         }
     }
@@ -94,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
             seekBar.setProgress(0);
         }
         raceRunning = false;
+
+        btnReset.setEnabled(false);
+        btnStart.setEnabled(true);
     }
 
     private void updateSeekBarProgress() {
@@ -127,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
                     handler.postDelayed(this, 100);
                 } else {
                     raceRunning = false; // Race finished
+
+                    btnReset.setEnabled(true);
                 }
             }
         }, 100);
