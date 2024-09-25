@@ -1,6 +1,7 @@
 package com.group2.racing_game;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
@@ -12,11 +13,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group2.racing_game.DAO.CarDAO;
+import com.group2.racing_game.DAO.UserDAO;
 import com.group2.racing_game.entity.Car;
 
 import java.util.ArrayList;
@@ -28,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
     private final Random random = new Random();
     private List<SeekBar> seekBars = new ArrayList<>();
     private LinearLayout seekbarContainer;
-    Button btnLogout, btnStart, btnReset;
+    Button btnLogout, btnStart, btnReset, btnDeposit;
     private boolean raceRunning = false;
-
+    TextView tvAmount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.btnLogout);
         btnStart = findViewById(R.id.btnStart);
         btnReset = findViewById(R.id.btnReset);
-
+        btnDeposit = findViewById(R.id.btnDeposit);
+        tvAmount = findViewById(R.id.tvMoney);
+        tvAmount.setText("$ "+ String.format("%.2f", UserDAO.getCurrentUser().getTotalCash()));
         // Add SeekBars from CarDAO
         addSeekBars();
 
@@ -55,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         btnReset.setOnClickListener(view -> resetRace());
+        btnDeposit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,DepositPageActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -84,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
             seekBars.add(seekBar);
         }
     }
-
 
     // Start the race
     private void startRace() {
@@ -139,6 +151,9 @@ public class MainActivity extends AppCompatActivity {
                 if (!raceFinished) {
                     handler.postDelayed(this, 100);
                 } else {
+                    // Stop the race
+                    raceRunning = false;
+                    tvAmount.setText("$ "+ String.format("%.2f",UserDAO.getCurrentUser().getTotalCash()));
                     raceRunning = false; // Race finished
 
                     btnReset.setEnabled(true);
