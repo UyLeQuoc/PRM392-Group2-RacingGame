@@ -28,17 +28,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Logout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.949"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <SeekBar
         android:id="@+id/seekBar1"
         android:layout_width="256dp"
@@ -52,13 +41,6 @@
         app:layout_constraintHorizontal_bias="0.294"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <CheckBox
-        android:id="@+id/checkBox1"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/seekBar1"
-        app:layout_constraintTop_toTopOf="@+id/seekBar1" />
 
     <EditText
         android:id="@+id/editTextNumber1"
@@ -83,13 +65,6 @@
         app:layout_constraintStart_toStartOf="@+id/seekBar1"
         app:layout_constraintTop_toBottomOf="@+id/seekBar1" />
 
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/seekBar2"
-        app:layout_constraintTop_toTopOf="@+id/seekBar2" />
-
     <EditText
         android:id="@+id/editTextNumber2"
         android:layout_width="108dp"
@@ -112,13 +87,6 @@
         app:layout_constraintHorizontal_bias="0.182"
         app:layout_constraintStart_toStartOf="@+id/seekBar2"
         app:layout_constraintTop_toBottomOf="@+id/seekBar2" />
-
-    <CheckBox
-        android:id="@+id/checkBox3"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/seekBar3"
-        app:layout_constraintTop_toTopOf="@+id/seekBar3" />
 
     <EditText
         android:id="@+id/editTextNumber3"
@@ -143,13 +111,6 @@
         app:layout_constraintStart_toStartOf="@+id/seekBar3"
         app:layout_constraintTop_toBottomOf="@+id/seekBar3" />
 
-    <CheckBox
-        android:id="@+id/checkBox4"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/seekBar4"
-        app:layout_constraintTop_toTopOf="@+id/seekBar4" />
-
     <EditText
         android:id="@+id/editTextNumber4"
         android:layout_width="108dp"
@@ -171,13 +132,6 @@
         android:thumb="@drawable/seekbar_thumb"
         app:layout_constraintStart_toStartOf="@+id/seekBar4"
         app:layout_constraintTop_toBottomOf="@+id/seekBar4" />
-
-    <CheckBox
-        android:id="@+id/checkBox5"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/seekBar5"
-        app:layout_constraintTop_toTopOf="@+id/seekBar5" />
 
     <EditText
         android:id="@+id/editTextNumber5"
@@ -209,5 +163,39 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btnStart"
         app:layout_constraintTop_toTopOf="@+id/btnStart" />
+
+    <LinearLayout
+        android:layout_width="410dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="56dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/coinImg"
+            android:layout_width="53dp"
+            android:layout_height="40dp"
+            tools:srcCompat="@drawable/coin_icon" />
+
+        <TextView
+            android:id="@+id/totalMoney"
+            android:layout_width="256dp"
+            android:layout_height="40dp"
+            android:text="0"
+            android:textSize="20sp"
+            android:textColor="#ffca3e"
+            />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Logout" />
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
