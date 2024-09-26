@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private final Random random = new Random();
     private List<SeekBar> seekBars = new ArrayList<>();
     private LinearLayout seekbarContainer;
-    Button btnLogout, btnStart, btnReset, btnDeposit;
+    Button btnLogout, btnStart, btnReset, btnDeposit, btnShowRules;
     private boolean raceRunning = false;
     TextView tvAmount;
     @Override
@@ -46,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
         btnReset = findViewById(R.id.btnReset);
         btnDeposit = findViewById(R.id.btnDeposit);
         tvAmount = findViewById(R.id.tvMoney);
+        btnShowRules = findViewById(R.id.btn_show_rules);
         tvAmount.setText("$ "+ String.format("%.2f", UserDAO.getCurrentUser().getTotalCash()));
+
         // Add SeekBars from CarDAO
         addSeekBars();
 
@@ -68,6 +70,16 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+        // Set sự kiện click cho button
+        btnShowRules.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển sang RulePageActivity
+                Intent intent = new Intent(MainActivity.this, RulePageActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
