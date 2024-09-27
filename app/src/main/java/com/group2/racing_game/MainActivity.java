@@ -219,42 +219,31 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (seekBar1.getProgress() < seekBar1.getMax()) {
-                    seekBar1.setProgress(seekBar1.getProgress() + random.nextInt(5) + 1);
-                } else if (!winnerOrder.contains(carList.get(0))) {
-                    winnerOrder.add(carList.get(0));
-                }
+                updateSeekBarProgress(seekBar1, carList.get(0));
+                updateSeekBarProgress(seekBar2, carList.get(1));
+                updateSeekBarProgress(seekBar3, carList.get(2));
+                updateSeekBarProgress(seekBar4, carList.get(3));
+                updateSeekBarProgress(seekBar5, carList.get(4));
 
-                if (seekBar2.getProgress() < seekBar2.getMax()) {
-                    seekBar2.setProgress(seekBar2.getProgress() + random.nextInt(5) + 1);
-                } else if (!winnerOrder.contains(carList.get(1))) {
-                    winnerOrder.add(carList.get(1));
-                }
-
-                if (seekBar3.getProgress() < seekBar3.getMax()) {
-                    seekBar3.setProgress(seekBar3.getProgress() + random.nextInt(5) + 1);
-                } else if (!winnerOrder.contains(carList.get(2))) {
-                    winnerOrder.add(carList.get(2));
-                }
-
-                if (seekBar4.getProgress() < seekBar4.getMax()) {
-                    seekBar4.setProgress(seekBar4.getProgress() + random.nextInt(5) + 1);
-                } else if (!winnerOrder.contains(carList.get(3))) {
-                    winnerOrder.add(carList.get(3));
-                }
-
-                if (seekBar5.getProgress() < seekBar5.getMax()) {
-                    seekBar5.setProgress(seekBar5.getProgress() + random.nextInt(5) + 1);
-                } else if (!winnerOrder.contains(carList.get(4))) {
-                    winnerOrder.add(carList.get(4));
-                }
-
-                if (seekBar1.getProgress() < seekBar1.getMax() || seekBar2.getProgress() < seekBar2.getMax() || seekBar3.getProgress() < seekBar3.getMax() || seekBar4.getProgress() < seekBar4.getMax() || seekBar5.getProgress() < seekBar5.getMax()) {
+                // Check if any seek bar has not reached its max
+                if (seekBar1.getProgress() < seekBar1.getMax() ||
+                        seekBar2.getProgress() < seekBar2.getMax() ||
+                        seekBar3.getProgress() < seekBar3.getMax() ||
+                        seekBar4.getProgress() < seekBar4.getMax() ||
+                        seekBar5.getProgress() < seekBar5.getMax()) {
                     handler.postDelayed(this, 100);
                 } else {
                     raceRunning = false;
                     btnReset.setEnabled(true);
                     calculateWinnings();
+                }
+            }
+
+            private void updateSeekBarProgress(SeekBar seekBar, Car car) {
+                if (seekBar.getProgress() < seekBar.getMax()) {
+                    seekBar.setProgress(seekBar.getProgress() + car.getRandomProgressIncrement());
+                } else if (!winnerOrder.contains(car)) {
+                    winnerOrder.add(car);
                 }
             }
         }, 100);

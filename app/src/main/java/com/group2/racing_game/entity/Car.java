@@ -1,6 +1,7 @@
 package com.group2.racing_game.entity;
 
 import java.io.Serializable;
+import java.util.Random;
 
 public class Car implements Serializable {
     private int id;
@@ -9,6 +10,7 @@ public class Car implements Serializable {
     private double minSpeed;
     private double maxSpeed;
     private double rate;
+    private Random random = new Random();
 
     public Car(int id, String name, int icon, double minSpeed, double maxSpeed, double rate) {
         this.id = id;
@@ -66,4 +68,10 @@ public class Car implements Serializable {
     public void setRate(double rate) {
         this.rate = rate;
     }
+
+    public int getRandomProgressIncrement() {
+        double randomSpeed = minSpeed + (random.nextDouble() * (maxSpeed - minSpeed));
+        return (int) Math.round(randomSpeed);
+    }
+
 }
