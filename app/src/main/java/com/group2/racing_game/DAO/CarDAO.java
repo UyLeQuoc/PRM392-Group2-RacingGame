@@ -11,11 +11,11 @@ public class CarDAO {
     private static List<Car> carList = new ArrayList<>();
 
     private CarDAO() {
-        carList.add(new Car(1, "Xe lăn", R.drawable.seekbar_thumb, 1, 5, 0.2));
-        carList.add(new Car(2, "Xe đạp", R.drawable.seekbar_thumb, 1, 5, 0.2));
-        carList.add(new Car(3, "Mô tô", R.drawable.seekbar_thumb, 1, 5, 0.2));
-        carList.add(new Car(4, "Lamborghini", R.drawable.seekbar_thumb, 1, 5, 0.2));
-        carList.add(new Car(5, "F1", R.drawable.seekbar_thumb, 1, 5, 0.2));
+        carList.add(new Car(1, "Xe lăn", R.drawable.seekbar_thumb, 1, 5, 5));
+        carList.add(new Car(2, "Xe đạp", R.drawable.seekbar_thumb, 1, 5, 5));
+        carList.add(new Car(3, "Mô tô", R.drawable.seekbar_thumb, 1, 5, 5));
+        carList.add(new Car(4, "Lamborghini", R.drawable.seekbar_thumb, 1, 5, 5));
+        carList.add(new Car(5, "F1", R.drawable.seekbar_thumb, 1, 5, 5));
     }
 
     public static CarDAO getInstance() {
@@ -23,5 +23,9 @@ public class CarDAO {
             instance = new CarDAO();
         }
         return instance;
+    }
+
+    public List<Car> getCarList() {
+        return carList;
     }
 }
