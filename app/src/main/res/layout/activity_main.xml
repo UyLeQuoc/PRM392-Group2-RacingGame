@@ -98,6 +98,8 @@
         android:layout_marginBottom="140dp"
         android:text="Xem luật chơi"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@null"
+        android:background="@drawable/retangle_button_quangbui"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
