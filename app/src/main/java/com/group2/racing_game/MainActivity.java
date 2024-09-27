@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -31,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
     TextView totalMoney;
     ImageView coinImg;
     EditText editTextNumber1, editTextNumber2, editTextNumber3, editTextNumber4, editTextNumber5;
+    ImageButton btnDeposit;
+    ImageButton btnShowRules;
     private List<SeekBar> seekBars = new ArrayList<>();
-    Button  btnDeposit, btnShowRules;
     private boolean raceRunning = false;
     private UserDAO userDAO = UserDAO.getInstance();
     private List<Car> winnerOrder = new ArrayList<>();
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         btnDeposit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,DepositPageActivity.class);
+                Intent intent = new Intent(MainActivity.this, DepositPageActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -125,6 +127,13 @@ public class MainActivity extends AppCompatActivity {
         seekBar3.setEnabled(false);
         seekBar4.setEnabled(false);
         seekBar5.setEnabled(false);
+
+        seekBar1.setProgressDrawable(null);
+        seekBar2.setProgressDrawable(null);
+        seekBar3.setProgressDrawable(null);
+        seekBar4.setProgressDrawable(null);
+        seekBar5.setProgressDrawable(null);
+
     }
 
     private boolean validateBets() {

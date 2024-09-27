@@ -1,0 +1,10 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FC9D85" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+
+    <item android:drawable="@drawable/baseline_question_mark_24" />
+</layer-list>
