@@ -1,6 +1,8 @@
 package com.group2.racing_game.entity;
 
-public class Car {
+import java.io.Serializable;
+
+public class Car implements Serializable {
     private int id;
     private String name;
     private int icon;
