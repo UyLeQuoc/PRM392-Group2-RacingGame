@@ -11,12 +11,14 @@ public class UserDAO {
     private static User currentUser = null;
 
     private UserDAO() {
-        userList.add(new User(1, "uydev", "123456", 100.0));
-        userList.add(new User(2, "namtruong", "123456", 100.0));
-        userList.add(new User(3, "giahuan", "123456", 100.0));
-        userList.add(new User(4, "nguyenvu", "123456", 100.0));
-        userList.add(new User(5, "quangbui", "123456", 100.0));
-        userList.add(new User(6, "minhtien", "123456", 100.0));
+        if(userList.isEmpty()) {
+            userList.add(new User(1, "uydev", "123456", 100.0));
+            userList.add(new User(2, "namtruong", "123456", 100.0));
+            userList.add(new User(3, "giahuan", "123456", 100.0));
+            userList.add(new User(4, "nguyenvu", "123456", 100.0));
+            userList.add(new User(5, "quangbui", "123456", 100.0));
+            userList.add(new User(6, "minhtien", "123456", 100.0));
+        }
     }
 
     public static UserDAO getInstance() {
