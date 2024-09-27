@@ -30,11 +30,11 @@ public class RulePageActivity extends AppCompatActivity {
 
         // Mảng chứa thông tin xe
         String[][] vehicleInfo = {
-                {"Xe lăn", "3", "9", "1.2"},
-                {"Xe đạp", "1", "5", "0.2"},
-                {"Mô tô", "1", "5", "0.2"},
-                {"Lamborghini", "1", "5", "0.2"},
-                {"F1", "1", "5", "0.2"}
+                {"Xe lăn", "1.37", "1.5", "4"},
+                {"Xe đạp", "0.35", "1.75", "2.5"},
+                {"Mô tô", "-0.15", "2.25", "2"},
+                {"Lamborghini", "-0.05", "2.5", "1.5"},
+                {"F1", "-0.35", "2.75", "1"}
         };
 
         // Gán TableLayout
@@ -42,7 +42,7 @@ public class RulePageActivity extends AppCompatActivity {
 
         // Thêm tiêu đề cho bảng
         TableRow headerRow = new TableRow(this);
-        String[] headers = {"Car", "MinSpeed", "MaxSpeed", "Scale"};
+        String[] headers = {"Car", "MinSpeed", "MaxSpeed", "Rate"};
         for (String header : headers) {
             TextView tvHeader = new TextView(this);
             tvHeader.setText(header);
