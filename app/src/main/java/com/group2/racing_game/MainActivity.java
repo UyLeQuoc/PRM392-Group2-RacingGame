@@ -1,19 +1,15 @@
 package com.group2.racing_game;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.InputType;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.group2.racing_game.DAO.CarDAO;
 import com.group2.racing_game.DAO.UserDAO;
 import com.group2.racing_game.entity.Car;
+import com.group2.racing_game.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,39 +26,59 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     private final Handler handler = new Handler();
     private final Random random = new Random();
+    Button btnLogout, btnStart, btnReset;
+    SeekBar seekBar1, seekBar2, seekBar3, seekBar4, seekBar5;
+    TextView totalMoney;
+    ImageView coinImg;
+    EditText editTextNumber1, editTextNumber2, editTextNumber3, editTextNumber4, editTextNumber5;
     private List<SeekBar> seekBars = new ArrayList<>();
-    private LinearLayout seekbarContainer;
-    Button btnLogout, btnStart, btnReset, btnDeposit, btnShowRules;
+    Button  btnDeposit, btnShowRules;
     private boolean raceRunning = false;
-    TextView tvAmount;
+    private UserDAO userDAO = UserDAO.getInstance();
+    private List<Car> winnerOrder = new ArrayList<>();
+    private int totalBetAmount = 0;
+    private int totalIncrease = 0;
+    private int totalDecrease = 0;
+    private List<Car> carList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        seekbarContainer = findViewById(R.id.seekbarContainer);
+        carList = CarDAO.getInstance().getCarList(); // Retrieve the list of cars
         btnLogout = findViewById(R.id.btnLogout);
         btnStart = findViewById(R.id.btnStart);
         btnReset = findViewById(R.id.btnReset);
-        btnDeposit = findViewById(R.id.btnDeposit);
-        tvAmount = findViewById(R.id.tvMoney);
         btnShowRules = findViewById(R.id.btn_show_rules);
-        tvAmount.setText("$ "+ String.format("%.2f", UserDAO.getCurrentUser().getTotalCash()));
+        btnDeposit = findViewById(R.id.btn_deposit);
 
         // Add SeekBars from CarDAO
-        addSeekBars();
 
-        // Initially disable the Reset button
-        btnReset.setEnabled(false);
+        User currentUser = UserDAO.getCurrentUser();
+        if (currentUser == null) {
+            finish();
+        }
 
+        RefElement();
+        totalMoney.setText(String.valueOf(currentUser.getTotalCash()));
+
+        // Handle logout button
         btnLogout.setOnClickListener(view -> finish());
+
+        // Handle Start button
         btnStart.setOnClickListener(view -> {
             if (!raceRunning) {
-                startRace();
+                if (validateBets()) {
+                    startRace();
+                }
             }
         });
+
+        // Handle Reset button
         btnReset.setOnClickListener(view -> resetRace());
+
         btnDeposit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,95 +99,223 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    private void addSeekBars() {
-        List<Car> cars = CarDAO.getInstance().getCarList();
-        LayoutInflater inflater = LayoutInflater.from(this);
+    protected void RefElement() {
+        btnLogout = findViewById(R.id.btnLogout);
+        btnStart = findViewById(R.id.btnStart);
+        btnReset = findViewById(R.id.btnReset);
 
-        for (Car car : cars) {
-            // Inflate the custom layout
-            View seekbarItem = inflater.inflate(R.layout.item_seekbar, seekbarContainer, false);
+        seekBar1 = findViewById(R.id.seekBar1);
+        seekBar2 = findViewById(R.id.seekBar2);
+        seekBar3 = findViewById(R.id.seekBar3);
+        seekBar4 = findViewById(R.id.seekBar4);
+        seekBar5 = findViewById(R.id.seekBar5);
+        totalMoney = findViewById(R.id.totalMoney);
+        coinImg = findViewById(R.id.coinImg);
+        coinImg.setImageResource(R.drawable.coin_icon);
+        btnReset.setEnabled(false);
 
-            // Find the views inside the custom layout
-            CheckBox checkBox = seekbarItem.findViewById(R.id.checkBox);
-            SeekBar seekBar = seekbarItem.findViewById(R.id.seekBar);
-            EditText betAmount = seekbarItem.findViewById(R.id.editTextNumber);
+        editTextNumber1 = findViewById(R.id.editTextNumber1);
+        editTextNumber2 = findViewById(R.id.editTextNumber2);
+        editTextNumber3 = findViewById(R.id.editTextNumber3);
+        editTextNumber4 = findViewById(R.id.editTextNumber4);
+        editTextNumber5 = findViewById(R.id.editTextNumber5);
 
-            // Set the thumb drawable for the SeekBar
-            seekBar.setThumb(getResources().getDrawable(car.getIcon(), null));
-
-            // Disable the SeekBar
-            seekBar.setEnabled(false);
-
-            // Add the inflated view to the container
-            seekbarContainer.addView(seekbarItem);
-
-            // Add seekbar to the list
-            seekBars.add(seekBar);
-        }
+        seekBar1.setEnabled(false);
+        seekBar2.setEnabled(false);
+        seekBar3.setEnabled(false);
+        seekBar4.setEnabled(false);
+        seekBar5.setEnabled(false);
     }
 
-    // Start the race
+    private boolean validateBets() {
+        User currentUser = UserDAO.getCurrentUser();
+        if (currentUser == null) return false;
+
+        totalBetAmount = 0;
+        totalIncrease = 0;
+        totalDecrease = 0;
+
+        // Check if any bet is placed
+        boolean isBetPlaced = false;
+
+        if (!editTextNumber1.getText().toString().isEmpty()) {
+            int bet1 = Integer.parseInt(editTextNumber1.getText().toString());
+            if (bet1 > 0) {
+                totalBetAmount += bet1;
+                isBetPlaced = true;
+            }
+        }
+
+        if (!editTextNumber2.getText().toString().isEmpty()) {
+            int bet2 = Integer.parseInt(editTextNumber2.getText().toString());
+            if (bet2 > 0) {
+                totalBetAmount += bet2;
+                isBetPlaced = true;
+            }
+        }
+
+        if (!editTextNumber3.getText().toString().isEmpty()) {
+            int bet3 = Integer.parseInt(editTextNumber3.getText().toString());
+            if (bet3 > 0) {
+                totalBetAmount += bet3;
+                isBetPlaced = true;
+            }
+        }
+
+        if (!editTextNumber4.getText().toString().isEmpty()) {
+            int bet4 = Integer.parseInt(editTextNumber4.getText().toString());
+            if (bet4 > 0) {
+                totalBetAmount += bet4;
+                isBetPlaced = true;
+            }
+        }
+
+        if (!editTextNumber5.getText().toString().isEmpty()) {
+            int bet5 = Integer.parseInt(editTextNumber5.getText().toString());
+            if (bet5 > 0) {
+                totalBetAmount += bet5;
+                isBetPlaced = true;
+            }
+        }
+
+        // Check if at least one bet is placed
+        if (!isBetPlaced) {
+            showError("Please place a bet on at least one car.");
+            return false;
+        }
+
+        // Check if the user has enough money
+        if (totalBetAmount > currentUser.getTotalCash()) {
+            showError("You don't have enough money to place these bets.");
+            return false;
+        }
+
+        return true;
+    }
+
     private void startRace() {
         if (!raceRunning) {
-            raceRunning = true;
-
             btnStart.setEnabled(false);
             btnReset.setEnabled(false);
-
+            raceRunning = true;
             updateSeekBarProgress();
         }
     }
 
-    // Reset the race
     private void resetRace() {
-        for (SeekBar seekBar : seekBars) {
-            seekBar.setProgress(0);
-        }
-        raceRunning = false;
+        seekBar1.setProgress(0);
+        seekBar2.setProgress(0);
+        seekBar3.setProgress(0);
+        seekBar4.setProgress(0);
+        seekBar5.setProgress(0);
 
-        btnReset.setEnabled(false);
         btnStart.setEnabled(true);
+        btnReset.setEnabled(false);
+        winnerOrder.clear();
+        raceRunning = false;
     }
 
     private void updateSeekBarProgress() {
-        List<Car> cars = CarDAO.getInstance().getCarList();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                boolean raceFinished = true;
+                updateSeekBarProgress(seekBar1, carList.get(0));
+                updateSeekBarProgress(seekBar2, carList.get(1));
+                updateSeekBarProgress(seekBar3, carList.get(2));
+                updateSeekBarProgress(seekBar4, carList.get(3));
+                updateSeekBarProgress(seekBar5, carList.get(4));
 
-                for (int i = 0; i < seekBars.size(); i++) {
-                    SeekBar seekBar = seekBars.get(i);
-                    Car car = cars.get(i);
-
-                    if (seekBar.getProgress() < seekBar.getMax()) {
-                        // Calculate a random progress
-                        double randomSpeed = car.getMinSpeed() + (random.nextDouble() * (car.getMaxSpeed() - car.getMinSpeed()));
-
-                        // Update SeekBar progress
-                        int newProgress = seekBar.getProgress() + (int) Math.round(randomSpeed);
-                        seekBar.setProgress(newProgress);
-
-                        // Keep the race going
-                        if (seekBar.getProgress() < seekBar.getMax()) {
-                            raceFinished = false;
-                        }
-                    }
-                }
-
-                // Continue updating if the race hasn't finished
-                if (!raceFinished) {
+                // Check if any seek bar has not reached its max
+                if (seekBar1.getProgress() < seekBar1.getMax() ||
+                        seekBar2.getProgress() < seekBar2.getMax() ||
+                        seekBar3.getProgress() < seekBar3.getMax() ||
+                        seekBar4.getProgress() < seekBar4.getMax() ||
+                        seekBar5.getProgress() < seekBar5.getMax()) {
                     handler.postDelayed(this, 100);
                 } else {
-                    // Stop the race
                     raceRunning = false;
-                    tvAmount.setText("$ "+ String.format("%.2f",UserDAO.getCurrentUser().getTotalCash()));
-                    raceRunning = false; // Race finished
-
                     btnReset.setEnabled(true);
+                    calculateWinnings();
+                }
+            }
+
+            private void updateSeekBarProgress(SeekBar seekBar, Car car) {
+                if (seekBar.getProgress() < seekBar.getMax()) {
+                    seekBar.setProgress(seekBar.getProgress() + car.getRandomProgressIncrement());
+                } else if (!winnerOrder.contains(car)) {
+                    winnerOrder.add(car);
                 }
             }
         }, 100);
+    }
+
+    private void calculateWinnings() {
+        User currentUser = UserDAO.getCurrentUser();
+        carList = CarDAO.getInstance().getCarList();
+        if (currentUser == null) return;
+
+        // Deduct the total bet amount from the user's total cash
+        currentUser.setTotalCash(currentUser.getTotalCash() - totalBetAmount);
+
+        // Calculate the winnings for each car based on the bet and the race result
+        if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(0).getName()) && !editTextNumber1.getText().toString().isEmpty()) {
+            int bet1 = Integer.parseInt(editTextNumber1.getText().toString());
+            totalIncrease += bet1 * carList.get(0).getRate();
+        } else if (!editTextNumber1.getText().toString().isEmpty()) {
+            int bet1 = Integer.parseInt(editTextNumber1.getText().toString());
+            totalDecrease += bet1;
+        }
+
+        if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(1).getName()) && !editTextNumber2.getText().toString().isEmpty()) {
+            int bet2 = Integer.parseInt(editTextNumber2.getText().toString());
+            totalIncrease += bet2 * carList.get(1).getRate();
+        } else if (!editTextNumber2.getText().toString().isEmpty()) {
+            int bet2 = Integer.parseInt(editTextNumber2.getText().toString());
+            totalDecrease += bet2;
+        }
+
+        if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(2).getName()) && !editTextNumber3.getText().toString().isEmpty()) {
+            int bet3 = Integer.parseInt(editTextNumber3.getText().toString());
+            totalIncrease += bet3 * carList.get(2).getRate();
+        } else if (!editTextNumber3.getText().toString().isEmpty()) {
+            int bet3 = Integer.parseInt(editTextNumber3.getText().toString());
+            totalDecrease += bet3;
+        }
+
+        if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(3).getName()) && !editTextNumber4.getText().toString().isEmpty()) {
+            int bet4 = Integer.parseInt(editTextNumber4.getText().toString());
+            totalIncrease += bet4 * carList.get(3).getRate();
+        } else if (!editTextNumber4.getText().toString().isEmpty()) {
+            int bet4 = Integer.parseInt(editTextNumber4.getText().toString());
+            totalDecrease += bet4;
+        }
+
+        if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(4).getName()) && !editTextNumber5.getText().toString().isEmpty()) {
+            int bet5 = Integer.parseInt(editTextNumber5.getText().toString());
+            totalIncrease += bet5 * carList.get(4).getRate();
+        } else if (!editTextNumber5.getText().toString().isEmpty()) {
+            int bet5 = Integer.parseInt(editTextNumber5.getText().toString());
+            totalDecrease += bet5;
+        }
+
+        // Recalculate total money: increase the winnings and update the user's total cash
+        double newTotalMoney = currentUser.getTotalCash() + totalIncrease;
+        currentUser.setTotalCash(newTotalMoney);
+
+        // Update the total money on screen
+        totalMoney.setText(String.valueOf(currentUser.getTotalCash()));
+
+        // Send the result to ResultPageActivity
+        Intent intent = new Intent(MainActivity.this, ResultPageActivity.class);
+        ArrayList<Car> raceResults = new ArrayList<>(winnerOrder);
+        intent.putExtra("raceResults", raceResults);
+        intent.putExtra("totalIncrease", totalIncrease);
+        intent.putExtra("totalDecrease", totalDecrease);
+        startActivity(intent);
+    }
+
+
+    private void showError(String message) {
+        Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 }

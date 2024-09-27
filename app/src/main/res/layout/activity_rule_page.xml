@@ -57,7 +57,6 @@
 
     </ScrollView>
 
-
     <Button
         android:id="@+id/button_back_to_main"
         android:layout_width="wrap_content"

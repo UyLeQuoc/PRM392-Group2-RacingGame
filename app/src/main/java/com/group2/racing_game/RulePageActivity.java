@@ -18,7 +18,6 @@ public class RulePageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rule_page);  // Gắn layout cho activity
-
         buttonBackToMain = findViewById(R.id.button_back_to_main);
         buttonBackToMain.setOnClickListener(new View.OnClickListener() {
             @Override

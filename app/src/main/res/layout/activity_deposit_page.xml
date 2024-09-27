@@ -5,24 +5,29 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/game_background_2"
     tools:context=".DepositPageActivity">
+
 
     <EditText
         android:id="@+id/editTextInput"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="390dp"
+        android:layout_height="48dp"
         android:layout_marginTop="72dp"
+        android:background="@color/white"
         android:hint="Enter an integer"
         android:inputType="number"
+        android:textColorHint="#A29292"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <ListView
         android:id="@+id/lvDepositHistory"
-        android:layout_width="411dp"
-        android:layout_height="700dp"
+        android:layout_width="412dp"
+        android:layout_height="715dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,6 +62,7 @@
         android:layout_height="32dp"
         android:layout_marginBottom="7dp"
         android:text="Account: Mr.Testing"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextInput"
         app:layout_constraintStart_toStartOf="parent" />
