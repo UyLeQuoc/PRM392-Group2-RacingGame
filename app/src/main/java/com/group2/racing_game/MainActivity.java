@@ -27,7 +27,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     private final Handler handler = new Handler();
     private final Random random = new Random();
-    Button btnLogout, btnStart, btnReset;
+    Button btnLogout, btnStart, btnReset, btnProfile;
     SeekBar seekBar1, seekBar2, seekBar3, seekBar4, seekBar5;
     TextView totalMoney;
     ImageView coinImg;
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.btnLogout);
         btnStart = findViewById(R.id.btnStart);
         btnReset = findViewById(R.id.btnReset);
+        btnProfile = findViewById(R.id.btnProfile);
         btnShowRules = findViewById(R.id.btn_show_rules);
         btnDeposit = findViewById(R.id.btn_deposit);
 
@@ -96,6 +97,15 @@ public class MainActivity extends AppCompatActivity {
                 // Chuyển sang RulePageActivity
                 Intent intent = new Intent(MainActivity.this, RulePageActivity.class);
                 startActivity(intent);
+            }
+        });
+        //Handle profile button
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ProfilePageActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

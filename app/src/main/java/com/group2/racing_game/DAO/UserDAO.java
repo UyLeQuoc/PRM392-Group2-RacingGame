@@ -46,4 +46,15 @@ public class UserDAO {
     public static void setCurrentUser(User currentUser) {
         UserDAO.currentUser = currentUser;
     }
+
+    public static void updateCurrentUser(String newUsername, String newPassword, double newTotalCash) {
+        if (currentUser != null) {
+            currentUser.setUsername(newUsername);
+            currentUser.setPassword(newPassword);
+            currentUser.setTotalCash(newTotalCash);
+        } else {
+            System.out.println("Chưa có người dùng nào đăng nhập!");
+        }
+    }
+
 }

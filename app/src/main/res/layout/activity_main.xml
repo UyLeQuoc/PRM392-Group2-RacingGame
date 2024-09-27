@@ -225,4 +225,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/racing_text" />
 
+
+    <Button
+        android:id="@+id/btnProfile"
+        android:layout_width="107dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="132dp"
+        android:text="Profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
