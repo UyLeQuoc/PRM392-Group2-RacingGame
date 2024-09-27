@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     TextView totalMoney;
     ImageView coinImg;
     EditText editTextNumber1, editTextNumber2, editTextNumber3, editTextNumber4, editTextNumber5;
+    private List<SeekBar> seekBars = new ArrayList<>();
+    private LinearLayout seekbarContainer;
+    Button btnLogout, btnStart, btnReset, btnDeposit, btnShowRules;
     private boolean raceRunning = false;
     private UserDAO userDAO = UserDAO.getInstance();
     private List<Car> winnerOrder = new ArrayList<>();
@@ -46,6 +49,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         carList = CarDAO.getInstance().getCarList(); // Retrieve the list of cars
+        seekbarContainer = findViewById(R.id.seekbarContainer);
+        btnLogout = findViewById(R.id.btnLogout);
+        btnStart = findViewById(R.id.btnStart);
+        btnReset = findViewById(R.id.btnReset);
+        btnDeposit = findViewById(R.id.btnDeposit);
+        tvAmount = findViewById(R.id.tvMoney);
+        btnShowRules = findViewById(R.id.btn_show_rules);
+        tvAmount.setText("$ "+ String.format("%.2f", UserDAO.getCurrentUser().getTotalCash()));
+
+        // Add SeekBars from CarDAO
+        addSeekBars();
 
         User currentUser = UserDAO.getCurrentUser();
         if (currentUser == null) {
@@ -69,6 +83,25 @@ public class MainActivity extends AppCompatActivity {
 
         // Handle Reset button
         btnReset.setOnClickListener(view -> resetRace());
+
+        btnDeposit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,DepositPageActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        // Set sự kiện click cho button
+        btnShowRules.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển sang RulePageActivity
+                Intent intent = new Intent(MainActivity.this, RulePageActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     protected void RefElement() {

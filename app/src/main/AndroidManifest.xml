@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Group2racinggame"
         tools:targetApi="31">
-
+        <activity android:name=".RulePageActivity"
+                  android:exported="false"/>
         <activity
             android:name=".ResultPageActivity"
             android:exported="false" />
