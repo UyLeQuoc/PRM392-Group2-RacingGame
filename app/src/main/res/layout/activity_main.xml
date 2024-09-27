@@ -13,11 +13,11 @@
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="444dp"
-        android:background="@drawable/race_1"
+        android:background="@drawable/race_2"
         android:max="500"
         android:progressDrawable="@drawable/seekbar_track"
         android:splitTrack="false"
-        android:thumb="@drawable/seekbar_thumb"
+        android:thumb="@drawable/xe_lan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,11 +41,11 @@
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/race_2"
+        android:background="@drawable/race_1"
         android:max="500"
         android:progressDrawable="@drawable/seekbar_track"
         android:splitTrack="false"
-        android:thumb="@drawable/seekbar_thumb"
+        android:thumb="@drawable/xe_dap"
         app:layout_constraintStart_toStartOf="@+id/seekBar1"
         app:layout_constraintTop_toBottomOf="@+id/seekBar1" />
 
@@ -71,7 +71,7 @@
         android:max="500"
         android:progressDrawable="@drawable/seekbar_track"
         android:splitTrack="false"
-        android:thumb="@drawable/seekbar_thumb"
+        android:thumb="@drawable/mo_to"
         app:layout_constraintStart_toStartOf="@+id/seekBar2"
         app:layout_constraintTop_toBottomOf="@+id/seekBar2" />
 
@@ -97,7 +97,7 @@
         android:max="500"
         android:progressDrawable="@drawable/seekbar_track"
         android:splitTrack="false"
-        android:thumb="@drawable/seekbar_thumb"
+        android:thumb="@drawable/lamborghini"
         app:layout_constraintStart_toStartOf="@+id/seekBar3"
         app:layout_constraintTop_toBottomOf="@+id/seekBar3" />
 
@@ -119,11 +119,11 @@
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/race_5"
+        android:background="@drawable/race_6"
         android:max="500"
         android:progressDrawable="@drawable/seekbar_track"
         android:splitTrack="false"
-        android:thumb="@drawable/seekbar_thumb"
+        android:thumb="@drawable/f1"
         app:layout_constraintStart_toStartOf="@+id/seekBar4"
         app:layout_constraintTop_toBottomOf="@+id/seekBar4" />
 
