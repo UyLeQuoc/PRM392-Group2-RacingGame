@@ -4,42 +4,22 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background"
     tools:context=".MainActivity">
 
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
-        android:gradientRadius="5"
-        android:letterSpacing="0.1"
-        android:shadowColor="#000000"
-        android:shadowDx="4"
-        android:shadowDy="4"
-        android:shadowRadius="6"
-        android:text="BET TỚI CHẾT"
-        android:textAlignment="center"
-        android:textColor="#03A9F4"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <SeekBar
         android:id="@+id/seekBar1"
-        android:layout_width="256dp"
+        android:layout_width="300dp"
         android:layout_height="48dp"
-        android:layout_marginTop="252dp"
+        android:layout_marginTop="444dp"
         android:background="@drawable/race_1"
         android:max="500"
         android:progressDrawable="@drawable/seekbar_track"
         android:splitTrack="false"
         android:thumb="@drawable/seekbar_thumb"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.294"
+        app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,15 +27,18 @@
         android:id="@+id/editTextNumber1"
         android:layout_width="108dp"
         android:layout_height="48dp"
+        android:layout_marginLeft="8dp"
         android:hint="Bet amount"
         android:inputType="number"
         android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintStart_toEndOf="@+id/seekBar1"
         app:layout_constraintTop_toTopOf="@+id/seekBar1" />
 
     <SeekBar
         android:id="@+id/seekBar2"
-        android:layout_width="256dp"
+        android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/race_2"
@@ -63,7 +46,6 @@
         android:progressDrawable="@drawable/seekbar_track"
         android:splitTrack="false"
         android:thumb="@drawable/seekbar_thumb"
-        app:layout_constraintHorizontal_bias="0.182"
         app:layout_constraintStart_toStartOf="@+id/seekBar1"
         app:layout_constraintTop_toBottomOf="@+id/seekBar1" />
 
@@ -71,15 +53,18 @@
         android:id="@+id/editTextNumber2"
         android:layout_width="108dp"
         android:layout_height="48dp"
+        android:layout_marginLeft="8dp"
         android:hint="Bet amount"
         android:inputType="number"
         android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintStart_toEndOf="@+id/seekBar2"
         app:layout_constraintTop_toTopOf="@+id/seekBar2" />
 
     <SeekBar
         android:id="@+id/seekBar3"
-        android:layout_width="256dp"
+        android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/race_3"
@@ -87,7 +72,6 @@
         android:progressDrawable="@drawable/seekbar_track"
         android:splitTrack="false"
         android:thumb="@drawable/seekbar_thumb"
-        app:layout_constraintHorizontal_bias="0.182"
         app:layout_constraintStart_toStartOf="@+id/seekBar2"
         app:layout_constraintTop_toBottomOf="@+id/seekBar2" />
 
@@ -95,15 +79,18 @@
         android:id="@+id/editTextNumber3"
         android:layout_width="108dp"
         android:layout_height="48dp"
+        android:layout_marginLeft="8dp"
         android:hint="Bet amount"
         android:inputType="number"
         android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintStart_toEndOf="@+id/seekBar3"
         app:layout_constraintTop_toTopOf="@+id/seekBar3" />
 
     <SeekBar
         android:id="@+id/seekBar4"
-        android:layout_width="256dp"
+        android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/race_4"
@@ -111,7 +98,6 @@
         android:progressDrawable="@drawable/seekbar_track"
         android:splitTrack="false"
         android:thumb="@drawable/seekbar_thumb"
-        app:layout_constraintHorizontal_bias="0.182"
         app:layout_constraintStart_toStartOf="@+id/seekBar3"
         app:layout_constraintTop_toBottomOf="@+id/seekBar3" />
 
@@ -119,15 +105,18 @@
         android:id="@+id/editTextNumber4"
         android:layout_width="108dp"
         android:layout_height="48dp"
+        android:layout_marginLeft="8dp"
         android:hint="Bet amount"
         android:inputType="number"
         android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintStart_toEndOf="@+id/seekBar4"
         app:layout_constraintTop_toTopOf="@+id/seekBar4" />
 
     <SeekBar
         android:id="@+id/seekBar5"
-        android:layout_width="256dp"
+        android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/race_5"
@@ -142,9 +131,12 @@
         android:id="@+id/editTextNumber5"
         android:layout_width="108dp"
         android:layout_height="48dp"
+        android:layout_marginLeft="8dp"
         android:hint="Bet amount"
         android:inputType="number"
         android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintStart_toEndOf="@+id/seekBar5"
         app:layout_constraintTop_toTopOf="@+id/seekBar5" />
 
@@ -153,7 +145,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="40dp"
         android:text="START"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBar5" />
@@ -169,61 +161,68 @@
         app:layout_constraintStart_toEndOf="@+id/btnStart"
         app:layout_constraintTop_toTopOf="@+id/btnStart" />
 
-    <LinearLayout
-        android:layout_width="410dp"
+    <ImageButton
+        android:id="@+id/btn_show_rules"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/rule_icon_background"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_deposit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_deposit" />
+
+    <ImageButton
+        android:id="@+id/btn_deposit"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent"
+        android:src="@drawable/baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="@+id/coinImg"
+        app:layout_constraintStart_toEndOf="@+id/totalMoney"
+        app:layout_constraintTop_toTopOf="@+id/coinImg" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="107dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="4dp"
+        android:text="Logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/totalMoney"
+        android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginTop="56dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="6dp"
+        android:text="0"
+        android:textColor="#ffca3e"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/coinImg"
+        app:layout_constraintTop_toTopOf="@+id/coinImg" />
+
+    <ImageView
+        android:id="@+id/coinImg"
+        android:layout_width="53dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="180dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/coin_icon" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/coinImg"
-            android:layout_width="53dp"
-            android:layout_height="40dp"
-            tools:srcCompat="@drawable/coin_icon" />
-
-        <TextView
-            android:id="@+id/totalMoney"
-            android:layout_width="256dp"
-            android:layout_height="40dp"
-            android:text="0"
-            android:textColor="#ffca3e"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Logout" />
-
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_show_rules"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginEnd="244dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/retangle_button_quangbui"
-        android:text="Xem luật chơi"
-        app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/btn_deposit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="16dp"
-        android:text="Nap Tien"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/racing_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
