@@ -1,11 +1,9 @@
 package com.group2.racing_game;
 
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -14,9 +12,6 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.group2.racing_game.DAO.DepositInforDAO;
 import com.group2.racing_game.DAO.UserDAO;
@@ -54,16 +49,21 @@ public class DepositPageActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etInput.getText().toString().isEmpty())
-                    Toast.makeText(DepositPageActivity.this, "Please input a valid value!",Toast.LENGTH_SHORT).show();
+                if(etInput.getText().toString().isEmpty() || Double.parseDouble(etInput.getText().toString())<10 || Double.parseDouble(etInput.getText().toString())>10000000)
+                    Toast.makeText(DepositPageActivity.this, "Please input a valid value! From 10 to 10000000",Toast.LENGTH_SHORT).show();
                 else{
                     User tmp = UserDAO.getCurrentUser();
+                    if (tmp.getTotalCash()+Double.parseDouble(etInput.getText().toString())>=1000000000){
+                        Toast.makeText(DepositPageActivity.this, "Balance exceed max amount! Abort Depositing!",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     tmp.setTotalCash(tmp.getTotalCash()+Double.parseDouble(etInput.getText().toString()));
                     DepositInfor infor = new DepositInfor(UserDAO.getCurrentUser().getId(),Double.parseDouble(etInput.getText().toString()), LocalDateTime.now());
                     DepositInforDAO.Add(infor);
                     list.add(infor);
                     adapter.notifyDataSetChanged();
                     tvAccount.setText("Account:"+ UserDAO.getCurrentUser().getUsername() + " - $ " + UserDAO.getCurrentUser().getTotalCash());
+                    etInput.setText("");
                 }
             }
         });
