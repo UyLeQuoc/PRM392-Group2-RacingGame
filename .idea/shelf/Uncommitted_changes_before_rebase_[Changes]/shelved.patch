@@ -1,0 +1,271 @@
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\">\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/title\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"152dp\"\r\n        android:gradientRadius=\"5\"\r\n        android:letterSpacing=\"0.1\"\r\n        android:shadowColor=\"#000000\"\r\n        android:shadowDx=\"4\"\r\n        android:shadowDy=\"4\"\r\n        android:shadowRadius=\"6\"\r\n        android:text=\"BET TỚI CHẾT\"\r\n        android:textAlignment=\"center\"\r\n        android:textColor=\"#03A9F4\"\r\n        android:textSize=\"40sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.502\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/btnLogout\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"36dp\"\r\n        android:text=\"Logout\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.949\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/seekbarContainer\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:orientation=\"vertical\"\r\n        android:padding=\"16dp\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/title\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/btnStart\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"80dp\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:text=\"START\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/seekbarContainer\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/btnReset\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:layout_marginEnd=\"80dp\"\r\n        android:text=\"RESET\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/seekbarContainer\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/btn_show_rules\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_centerInParent=\"true\"\r\n        android:layout_marginEnd=\"16dp\"\r\n        android:layout_marginBottom=\"168dp\"\r\n        android:text=\"Xem luật chơi\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	(revision 070c791786fea430a19e068477f827d20b32914e)
++++ b/app/src/main/res/layout/activity_main.xml	(date 1727301967837)
+@@ -69,15 +69,24 @@
+         app:layout_constraintTop_toBottomOf="@+id/seekbarContainer" />
+ 
+     <Button
+-        android:id="@+id/btn_show_rules"
++        android:id="@+id/btnDeposit"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:layout_centerInParent="true"
+-        android:layout_marginEnd="16dp"
+-        android:layout_marginBottom="168dp"
+-        android:text="Xem luật chơi"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent" />
++        android:layout_marginTop="36dp"
++        android:layout_marginEnd="13dp"
++        android:text="Deposit"
++        app:layout_constraintEnd_toStartOf="@+id/btnLogout"
++        app:layout_constraintTop_toTopOf="parent" />
+ 
++    <TextView
++        android:id="@+id/tvMoney"
++        android:layout_width="164dp"
++        android:layout_height="45dp"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="36dp"
++        android:text="TextView"
++        android:textSize="25sp"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
+ 
+ </androidx.constraintlayout.widget.ConstraintLayout>
+Index: app/src/main/java/com/group2/racing_game/entity/DepositInfor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/group2/racing_game/entity/DepositInfor.java b/app/src/main/java/com/group2/racing_game/entity/DepositInfor.java
+new file mode 100644
+--- /dev/null	(date 1727301953348)
++++ b/app/src/main/java/com/group2/racing_game/entity/DepositInfor.java	(date 1727301953348)
+@@ -0,0 +1,25 @@
++package com.group2.racing_game.entity;
++
++import java.time.LocalDateTime;
++
++public class DepositInfor {
++    private int userId;
++    private double amount;
++    private LocalDateTime createAt;
++
++    public DepositInfor(int userId, double amount, LocalDateTime createAt) {
++        this.userId = userId;
++        this.amount = amount;
++        this.createAt = createAt;
++    }
++
++    public int getUserId() {
++        return userId;
++    }
++    public double getAmount() {
++        return amount;
++    }
++    public LocalDateTime getCreateAt() {
++        return createAt;
++    }
++}
+Index: app/src/main/res/layout/deposit_infor_layout.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/deposit_infor_layout.xml b/app/src/main/res/layout/deposit_infor_layout.xml
+new file mode 100644
+--- /dev/null	(date 1727301953406)
++++ b/app/src/main/res/layout/deposit_infor_layout.xml	(date 1727301953406)
+@@ -0,0 +1,30 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++
++    <TextView
++        android:id="@+id/txtAmount"
++        android:layout_width="376dp"
++        android:layout_height="47dp"
++        android:layout_marginTop="16dp"
++        android:text="TextView"
++        android:textSize="30sp"
++        android:textStyle="bold"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <TextView
++        android:id="@+id/txtDatetime"
++        android:layout_width="376dp"
++        android:layout_height="24dp"
++        android:layout_marginTop="72dp"
++        android:text="TextView"
++        android:textStyle="italic"
++        android:textColor="@color/cardview_dark_background"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/group2/racing_game/DTO/DepositAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/group2/racing_game/DTO/DepositAdapter.java b/app/src/main/java/com/group2/racing_game/DTO/DepositAdapter.java
+new file mode 100644
+--- /dev/null	(date 1727301953236)
++++ b/app/src/main/java/com/group2/racing_game/DTO/DepositAdapter.java	(date 1727301953236)
+@@ -0,0 +1,83 @@
++package com.group2.racing_game.DTO;
++
++import android.content.Context;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.BaseAdapter;
++import android.widget.ImageView;
++import android.widget.TextView;
++
++import com.group2.racing_game.R;
++import com.group2.racing_game.entity.DepositInfor;
++
++import java.time.LocalDateTime;
++import java.time.format.DateTimeFormatter;
++import java.time.format.DateTimeFormatterBuilder;
++import java.util.List;
++
++public class DepositAdapter extends BaseAdapter {
++    private Context context;
++    private int layout;
++    private List<DepositInfor> list;
++
++    public DepositAdapter(Context context, int layout, List<DepositInfor> list) {
++        this.context = context;
++        this.layout = layout;
++        this.list = list;
++    }
++
++    public Context getContext() {
++        return context;
++    }
++
++    public void setContext(Context context) {
++        this.context = context;
++    }
++
++    public int getLayout() {
++        return layout;
++    }
++
++    public void setLayout(int layout) {
++        this.layout = layout;
++    }
++
++    public List<DepositInfor> getList() {
++        return list;
++    }
++
++    public void setList(List<DepositInfor> list) {
++        this.list = list;
++    }
++    @Override
++    public int getCount() {
++        return list.size();
++    }
++
++    @Override
++    public Object getItem(int position) {
++        return list.get(position);
++    }
++
++    @Override
++    public long getItemId(int position) {
++        return -1;
++    }
++
++    @Override
++    public View getView(int position, View convertView, ViewGroup parent) {
++        LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
++        convertView = inflater.inflate(layout, null);
++
++        TextView txtAmount = (TextView) convertView.findViewById(R.id.txtAmount);
++        TextView txtCreateAt = (TextView) convertView.findViewById(R.id.txtDatetime);
++
++        DepositInfor item = list.get(position);
++
++        txtAmount.setText(String.valueOf(item.getAmount()));
++        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
++        txtCreateAt.setText(item.getCreateAt().format(formatter));
++        return convertView;
++    }
++}
+Index: app/src/main/java/com/group2/racing_game/DAO/DepositInforDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/group2/racing_game/DAO/DepositInforDAO.java b/app/src/main/java/com/group2/racing_game/DAO/DepositInforDAO.java
+new file mode 100644
+--- /dev/null	(date 1727301953291)
++++ b/app/src/main/java/com/group2/racing_game/DAO/DepositInforDAO.java	(date 1727301953291)
+@@ -0,0 +1,19 @@
++package com.group2.racing_game.DAO;
++
++import com.group2.racing_game.entity.DepositInfor;
++
++import java.util.ArrayList;
++import java.util.stream.Collectors;
++
++public class DepositInforDAO {
++    private static ArrayList<DepositInfor> list = new ArrayList<>();
++
++    public static ArrayList<DepositInfor> GetDeposits(){
++        int userId = UserDAO.getCurrentUser().getId();
++        return new ArrayList<DepositInfor>(list.stream().filter(x->x.getUserId() == userId).collect(Collectors.toList()));
++    }
++
++    public static void Add(DepositInfor infor){
++        list.add(infor);
++    }
++}
+Index: app/src/main/java/com/group2/racing_game/DAO/UserDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.group2.racing_game.DAO;\r\n\r\nimport com.group2.racing_game.entity.User;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class UserDAO {\r\n    private static UserDAO instance;\r\n    private static List<User> userList = new ArrayList<>();\r\n    private static User currentUser = null;\r\n\r\n    private UserDAO() {\r\n        userList.add(new User(1, \"uydev\", \"123456\", 100.0));\r\n        userList.add(new User(2, \"namtruong\", \"123456\", 100.0));\r\n        userList.add(new User(3, \"giahuan\", \"123456\", 100.0));\r\n        userList.add(new User(4, \"nguyenvu\", \"123456\", 100.0));\r\n        userList.add(new User(5, \"quangbui\", \"123456\", 100.0));\r\n        userList.add(new User(6, \"minhtien\", \"123456\", 100.0));\r\n    }\r\n\r\n    public static UserDAO getInstance() {\r\n        if (instance == null) {\r\n            instance = new UserDAO();\r\n        }\r\n        return instance;\r\n    }\r\n\r\n    public User Login(String username, String password){\r\n        for (int i=0; i<userList.size();i++){\r\n            User _currentUser = userList.get(i);\r\n            if(_currentUser.getUsername().equals(username) && _currentUser.getPassword().equals(password)){\r\n                setCurrentUser(_currentUser);\r\n                return currentUser;\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public static User getCurrentUser() {\r\n        return currentUser;\r\n    }\r\n\r\n    public static void setCurrentUser(User currentUser) {\r\n        UserDAO.currentUser = currentUser;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/group2/racing_game/DAO/UserDAO.java b/app/src/main/java/com/group2/racing_game/DAO/UserDAO.java
+--- a/app/src/main/java/com/group2/racing_game/DAO/UserDAO.java	(revision 070c791786fea430a19e068477f827d20b32914e)
++++ b/app/src/main/java/com/group2/racing_game/DAO/UserDAO.java	(date 1727301967783)
+@@ -11,12 +11,14 @@
+     private static User currentUser = null;
+ 
+     private UserDAO() {
+-        userList.add(new User(1, "uydev", "123456", 100.0));
+-        userList.add(new User(2, "namtruong", "123456", 100.0));
+-        userList.add(new User(3, "giahuan", "123456", 100.0));
+-        userList.add(new User(4, "nguyenvu", "123456", 100.0));
+-        userList.add(new User(5, "quangbui", "123456", 100.0));
+-        userList.add(new User(6, "minhtien", "123456", 100.0));
++        if(userList.isEmpty()) {
++            userList.add(new User(1, "uydev", "123456", 100.0));
++            userList.add(new User(2, "namtruong", "123456", 100.0));
++            userList.add(new User(3, "giahuan", "123456", 100.0));
++            userList.add(new User(4, "nguyenvu", "123456", 100.0));
++            userList.add(new User(5, "quangbui", "123456", 100.0));
++            userList.add(new User(6, "minhtien", "123456", 100.0));
++        }
+     }
+ 
+     public static UserDAO getInstance() {

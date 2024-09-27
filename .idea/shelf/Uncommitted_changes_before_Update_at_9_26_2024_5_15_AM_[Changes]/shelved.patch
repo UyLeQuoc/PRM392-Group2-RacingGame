@@ -1,0 +1,247 @@
+Index: app/src/main/java/com/group2/racing_game/DAO/UserDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.group2.racing_game.DAO;\r\n\r\nimport com.group2.racing_game.entity.User;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class UserDAO {\r\n    private static UserDAO instance;\r\n    private static List<User> userList = new ArrayList<>();\r\n    private static User currentUser = null;\r\n\r\n    private UserDAO() {\r\n        userList.add(new User(1, \"uydev\", \"123456\", 100.0));\r\n        userList.add(new User(2, \"namtruong\", \"123456\", 100.0));\r\n        userList.add(new User(3, \"giahuan\", \"123456\", 100.0));\r\n        userList.add(new User(4, \"nguyenvu\", \"123456\", 100.0));\r\n        userList.add(new User(5, \"quangbui\", \"123456\", 100.0));\r\n        userList.add(new User(6, \"minhtien\", \"123456\", 100.0));\r\n    }\r\n\r\n    public static UserDAO getInstance() {\r\n        if (instance == null) {\r\n            instance = new UserDAO();\r\n        }\r\n        return instance;\r\n    }\r\n\r\n    public User Login(String username, String password){\r\n        for (int i=0; i<userList.size();i++){\r\n            User _currentUser = userList.get(i);\r\n            if(_currentUser.getUsername().equals(username) && _currentUser.getPassword().equals(password)){\r\n                setCurrentUser(_currentUser);\r\n                return currentUser;\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public static User getCurrentUser() {\r\n        return currentUser;\r\n    }\r\n\r\n    public static void setCurrentUser(User currentUser) {\r\n        UserDAO.currentUser = currentUser;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/group2/racing_game/DAO/UserDAO.java b/app/src/main/java/com/group2/racing_game/DAO/UserDAO.java
+--- a/app/src/main/java/com/group2/racing_game/DAO/UserDAO.java	(revision 5f254def73a4c4fd60fde62cde126280a683b4a6)
++++ b/app/src/main/java/com/group2/racing_game/DAO/UserDAO.java	(date 1727302500590)
+@@ -11,12 +11,14 @@
+     private static User currentUser = null;
+ 
+     private UserDAO() {
+-        userList.add(new User(1, "uydev", "123456", 100.0));
+-        userList.add(new User(2, "namtruong", "123456", 100.0));
+-        userList.add(new User(3, "giahuan", "123456", 100.0));
+-        userList.add(new User(4, "nguyenvu", "123456", 100.0));
+-        userList.add(new User(5, "quangbui", "123456", 100.0));
+-        userList.add(new User(6, "minhtien", "123456", 100.0));
++        if(userList.isEmpty()) {
++            userList.add(new User(1, "uydev", "123456", 100.0));
++            userList.add(new User(2, "namtruong", "123456", 100.0));
++            userList.add(new User(3, "giahuan", "123456", 100.0));
++            userList.add(new User(4, "nguyenvu", "123456", 100.0));
++            userList.add(new User(5, "quangbui", "123456", 100.0));
++            userList.add(new User(6, "minhtien", "123456", 100.0));
++        }
+     }
+ 
+     public static UserDAO getInstance() {
+Index: .idea/deploymentTargetSelector.xml
+===================================================================
+diff --git a/.idea/deploymentTargetSelector.xml b/.idea/deploymentTargetSelector.xml
+deleted file mode 100644
+--- a/.idea/deploymentTargetSelector.xml	(revision 5f254def73a4c4fd60fde62cde126280a683b4a6)
++++ /dev/null	(revision 5f254def73a4c4fd60fde62cde126280a683b4a6)
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="deploymentTargetSelector">
+-    <selectionStates>
+-      <SelectionState runConfigName="Racing-game">
+-        <option name="selectionMode" value="DROPDOWN" />
+-      </SelectionState>
+-    </selectionStates>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: app/src/main/java/com/group2/racing_game/entity/DepositInfor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/group2/racing_game/entity/DepositInfor.java b/app/src/main/java/com/group2/racing_game/entity/DepositInfor.java
+new file mode 100644
+--- /dev/null	(date 1727302098806)
++++ b/app/src/main/java/com/group2/racing_game/entity/DepositInfor.java	(date 1727302098806)
+@@ -0,0 +1,25 @@
++package com.group2.racing_game.entity;
++
++import java.time.LocalDateTime;
++
++public class DepositInfor {
++    private int userId;
++    private double amount;
++    private LocalDateTime createAt;
++
++    public DepositInfor(int userId, double amount, LocalDateTime createAt) {
++        this.userId = userId;
++        this.amount = amount;
++        this.createAt = createAt;
++    }
++
++    public int getUserId() {
++        return userId;
++    }
++    public double getAmount() {
++        return amount;
++    }
++    public LocalDateTime getCreateAt() {
++        return createAt;
++    }
++}
+Index: app/src/main/res/layout/deposit_infor_layout.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/deposit_infor_layout.xml b/app/src/main/res/layout/deposit_infor_layout.xml
+new file mode 100644
+--- /dev/null	(date 1727302098814)
++++ b/app/src/main/res/layout/deposit_infor_layout.xml	(date 1727302098814)
+@@ -0,0 +1,30 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++
++    <TextView
++        android:id="@+id/txtAmount"
++        android:layout_width="376dp"
++        android:layout_height="47dp"
++        android:layout_marginTop="16dp"
++        android:text="TextView"
++        android:textSize="30sp"
++        android:textStyle="bold"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <TextView
++        android:id="@+id/txtDatetime"
++        android:layout_width="376dp"
++        android:layout_height="24dp"
++        android:layout_marginTop="72dp"
++        android:text="TextView"
++        android:textStyle="italic"
++        android:textColor="@color/cardview_dark_background"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/group2/racing_game/DTO/DepositAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/group2/racing_game/DTO/DepositAdapter.java b/app/src/main/java/com/group2/racing_game/DTO/DepositAdapter.java
+new file mode 100644
+--- /dev/null	(date 1727302098821)
++++ b/app/src/main/java/com/group2/racing_game/DTO/DepositAdapter.java	(date 1727302098821)
+@@ -0,0 +1,83 @@
++package com.group2.racing_game.DTO;
++
++import android.content.Context;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.BaseAdapter;
++import android.widget.ImageView;
++import android.widget.TextView;
++
++import com.group2.racing_game.R;
++import com.group2.racing_game.entity.DepositInfor;
++
++import java.time.LocalDateTime;
++import java.time.format.DateTimeFormatter;
++import java.time.format.DateTimeFormatterBuilder;
++import java.util.List;
++
++public class DepositAdapter extends BaseAdapter {
++    private Context context;
++    private int layout;
++    private List<DepositInfor> list;
++
++    public DepositAdapter(Context context, int layout, List<DepositInfor> list) {
++        this.context = context;
++        this.layout = layout;
++        this.list = list;
++    }
++
++    public Context getContext() {
++        return context;
++    }
++
++    public void setContext(Context context) {
++        this.context = context;
++    }
++
++    public int getLayout() {
++        return layout;
++    }
++
++    public void setLayout(int layout) {
++        this.layout = layout;
++    }
++
++    public List<DepositInfor> getList() {
++        return list;
++    }
++
++    public void setList(List<DepositInfor> list) {
++        this.list = list;
++    }
++    @Override
++    public int getCount() {
++        return list.size();
++    }
++
++    @Override
++    public Object getItem(int position) {
++        return list.get(position);
++    }
++
++    @Override
++    public long getItemId(int position) {
++        return -1;
++    }
++
++    @Override
++    public View getView(int position, View convertView, ViewGroup parent) {
++        LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
++        convertView = inflater.inflate(layout, null);
++
++        TextView txtAmount = (TextView) convertView.findViewById(R.id.txtAmount);
++        TextView txtCreateAt = (TextView) convertView.findViewById(R.id.txtDatetime);
++
++        DepositInfor item = list.get(position);
++
++        txtAmount.setText(String.valueOf(item.getAmount()));
++        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
++        txtCreateAt.setText(item.getCreateAt().format(formatter));
++        return convertView;
++    }
++}
+Index: app/src/main/java/com/group2/racing_game/DAO/DepositInforDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/group2/racing_game/DAO/DepositInforDAO.java b/app/src/main/java/com/group2/racing_game/DAO/DepositInforDAO.java
+new file mode 100644
+--- /dev/null	(date 1727302098827)
++++ b/app/src/main/java/com/group2/racing_game/DAO/DepositInforDAO.java	(date 1727302098827)
+@@ -0,0 +1,19 @@
++package com.group2.racing_game.DAO;
++
++import com.group2.racing_game.entity.DepositInfor;
++
++import java.util.ArrayList;
++import java.util.stream.Collectors;
++
++public class DepositInforDAO {
++    private static ArrayList<DepositInfor> list = new ArrayList<>();
++
++    public static ArrayList<DepositInfor> GetDeposits(){
++        int userId = UserDAO.getCurrentUser().getId();
++        return new ArrayList<DepositInfor>(list.stream().filter(x->x.getUserId() == userId).collect(Collectors.toList()));
++    }
++
++    public static void Add(DepositInfor infor){
++        list.add(infor);
++    }
++}

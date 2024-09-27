@@ -4,19 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RulePageActivity">
+    tools:context=".RulePageActivity"
+    android:background="@drawable/game_background_4">
+
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Luật chơi Game Đua Xe"
-        android:textSize="24sp"
+        android:text="ROLES RACING"
+        android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="#FFFFFF"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="48dp" />
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
@@ -26,13 +29,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title">
-        <TextView
-            android:id="@+id/tv_rules"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textSize="18sp" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_rules"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+            <TableLayout
+                android:id="@+id/tbl_vehicle_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1"
+                android:padding="10dp"
+
+                />
+        </LinearLayout>
+
+
     </ScrollView>
+
     <Button
         android:id="@+id/button_back_to_main"
         android:layout_width="wrap_content"
@@ -41,5 +65,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:backgroundTint="@null"
+        android:background="@drawable/retangle_button_quangbui"
+      />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
