@@ -53,7 +53,6 @@ public class ResultPageActivity extends AppCompatActivity {
         totalIncreaseTxt.setText("Increase: " + totalIncrease);
         totalDecreaseTxt.setText("Decrease: " + totalDecrease);
         moneyLeftTxt.setText("Money Left: " + moneyLeft);
-2
         btnBackToMain.setOnClickListener(v -> finish());
     }
 }

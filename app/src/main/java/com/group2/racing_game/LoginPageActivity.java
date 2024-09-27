@@ -83,7 +83,7 @@ public class LoginPageActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();  // Pause MediaPlayer when activity is paused
+            //mediaPlayer.pause();
         }
     }
 
@@ -91,7 +91,7 @@ public class LoginPageActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
-            mediaPlayer.start();  // Resume MediaPlayer when activity is resumed
+            mediaPlayer.start();
         }
     }
 
@@ -99,8 +99,8 @@ public class LoginPageActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (mediaPlayer != null) {
-            mediaPlayer.stop();     // Stop MediaPlayer when activity is destroyed
-            mediaPlayer.release();  // Release resources when no longer needed
+            mediaPlayer.stop();
+            mediaPlayer.release();
             mediaPlayer = null;
         }
     }
