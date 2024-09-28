@@ -16,7 +16,9 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group2.racing_game.DAO.CarDAO;
+import com.group2.racing_game.DAO.RoundDAO;
 import com.group2.racing_game.DAO.UserDAO;
+import com.group2.racing_game.DTO.BetDTO;
 import com.group2.racing_game.entity.Car;
 import com.group2.racing_game.entity.User;
 
@@ -273,49 +275,77 @@ public class MainActivity extends AppCompatActivity {
         carList = CarDAO.getInstance().getCarList();
         if (currentUser == null) return;
 
+        List<BetDTO> betList = new ArrayList<>();
+
         // Deduct the total bet amount from the user's total cash
         currentUser.setTotalCash(currentUser.getTotalCash() - totalBetAmount);
 
         // Calculate the winnings for each car based on the bet and the race result
-        if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(0).getName()) && !editTextNumber1.getText().toString().isEmpty()) {
+        if (!editTextNumber1.getText().toString().isEmpty()) {
             int bet1 = Integer.parseInt(editTextNumber1.getText().toString());
-            totalIncrease += bet1 * carList.get(0).getRate();
-        } else if (!editTextNumber1.getText().toString().isEmpty()) {
-            int bet1 = Integer.parseInt(editTextNumber1.getText().toString());
-            totalDecrease += bet1;
+            if (bet1 > 0) {
+                BetDTO betDTO = new BetDTO(carList.get(0), bet1);
+                betList.add(betDTO);  // Add to the bet list
+                if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(0).getName())) {
+                    totalIncrease += bet1 * carList.get(0).getRate();
+                } else {
+                    totalDecrease += bet1;
+                }
+            }
         }
 
-        if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(1).getName()) && !editTextNumber2.getText().toString().isEmpty()) {
+        if (!editTextNumber2.getText().toString().isEmpty()) {
             int bet2 = Integer.parseInt(editTextNumber2.getText().toString());
-            totalIncrease += bet2 * carList.get(1).getRate();
-        } else if (!editTextNumber2.getText().toString().isEmpty()) {
-            int bet2 = Integer.parseInt(editTextNumber2.getText().toString());
-            totalDecrease += bet2;
+            if (bet2 > 0) {
+                BetDTO betDTO = new BetDTO(carList.get(1), bet2);
+                betList.add(betDTO);
+                if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(1).getName())) {
+                    totalIncrease += bet2 * carList.get(1).getRate();
+                } else {
+                    totalDecrease += bet2;
+                }
+            }
         }
 
-        if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(2).getName()) && !editTextNumber3.getText().toString().isEmpty()) {
+        if (!editTextNumber3.getText().toString().isEmpty()) {
             int bet3 = Integer.parseInt(editTextNumber3.getText().toString());
-            totalIncrease += bet3 * carList.get(2).getRate();
-        } else if (!editTextNumber3.getText().toString().isEmpty()) {
-            int bet3 = Integer.parseInt(editTextNumber3.getText().toString());
-            totalDecrease += bet3;
+            if (bet3 > 0) {
+                BetDTO betDTO = new BetDTO(carList.get(2), bet3);
+                betList.add(betDTO);
+                if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(2).getName())) {
+                    totalIncrease += bet3 * carList.get(2).getRate();
+                } else {
+                    totalDecrease += bet3;
+                }
+            }
         }
 
-        if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(3).getName()) && !editTextNumber4.getText().toString().isEmpty()) {
+        if (!editTextNumber4.getText().toString().isEmpty()) {
             int bet4 = Integer.parseInt(editTextNumber4.getText().toString());
-            totalIncrease += bet4 * carList.get(3).getRate();
-        } else if (!editTextNumber4.getText().toString().isEmpty()) {
-            int bet4 = Integer.parseInt(editTextNumber4.getText().toString());
-            totalDecrease += bet4;
+            if (bet4 > 0) {
+                BetDTO betDTO = new BetDTO(carList.get(3), bet4);
+                betList.add(betDTO);
+                if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(3).getName())) {
+                    totalIncrease += bet4 * carList.get(3).getRate();
+                } else {
+                    totalDecrease += bet4;
+                }
+            }
         }
 
-        if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(4).getName()) && !editTextNumber5.getText().toString().isEmpty()) {
+        if (!editTextNumber5.getText().toString().isEmpty()) {
             int bet5 = Integer.parseInt(editTextNumber5.getText().toString());
-            totalIncrease += bet5 * carList.get(4).getRate();
-        } else if (!editTextNumber5.getText().toString().isEmpty()) {
-            int bet5 = Integer.parseInt(editTextNumber5.getText().toString());
-            totalDecrease += bet5;
+            if (bet5 > 0) {
+                BetDTO betDTO = new BetDTO(carList.get(4), bet5);
+                betList.add(betDTO);
+                if (winnerOrder.size() > 0 && winnerOrder.get(0).getName().equals(carList.get(4).getName())) {
+                    totalIncrease += bet5 * carList.get(4).getRate();
+                } else {
+                    totalDecrease += bet5;
+                }
+            }
         }
+
 
         // Recalculate total money: increase the winnings and update the user's total cash
         double newTotalMoney = currentUser.getTotalCash() + totalIncrease;
@@ -323,6 +353,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Update the total money on screen
         totalMoney.setText(String.valueOf(currentUser.getTotalCash()));
+
+        Car winningCar = winnerOrder.size() > 0 ? winnerOrder.get(0) : null;
+        if (winningCar != null) {
+            RoundDAO.getInstance().DoneBetting(currentUser, betList, winningCar);
+        }
+
 
         // Send the result to ResultPageActivity
         Intent intent = new Intent(MainActivity.this, ResultPageActivity.class);
