@@ -7,11 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".ProfilePageActivity">
 
+    <!-- Username EditText -->
     <TextView
         android:id="@+id/text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:background="#3497C5"
         android:gravity="center"
         android:padding="12dp"
@@ -20,10 +21,10 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Username EditText -->
     <EditText
         android:id="@+id/txtUsername"
         android:layout_width="0dp"
@@ -58,6 +59,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:enabled="false"
         android:hint="Total Cash"
         android:inputType="numberDecimal"
         android:padding="12dp"
@@ -68,27 +70,56 @@
         app:layout_constraintWidth_percent="0.8" />
 
     <!-- Update Button -->
+
+    <!-- Update Button -->
+
     <Button
         android:id="@+id/btnUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:padding="12dp"
         android:text="Update Profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTotalCash" />
 
-    <!-- Update Button -->
     <Button
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="396dp"
+        android:layout_marginTop="444dp"
         android:padding="12dp"
         android:text="Back to main"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnUpdate" />
+
+    <TextView
+        android:id="@+id/hiii"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#A1C0CA"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="Round history"
+        android:textColor="#455A64"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/historyListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdate"
+        app:layout_constraintVertical_bias="0.725" />
+
+    <ListView
+        android:id="@+id/historyListView"
+        android:layout_width="595dp"
+        android:layout_height="291dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnBack"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdate"
+        app:layout_constraintVertical_bias="0.666"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="39dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
