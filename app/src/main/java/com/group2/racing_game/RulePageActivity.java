@@ -43,11 +43,11 @@ public class RulePageActivity extends AppCompatActivity {
 
         // Mảng chứa thông tin xe
         String[][] vehicleInfo = {
-                {"Xe lăn", "3", "9", "1.2"},
-                {"Xe đạp", "1", "5", "0.2"},
-                {"Mô tô", "1", "5", "0.2"},
-                {"Lamborghini", "1", "5", "0.2"},
-                {"F1", "1", "5", "0.2"}
+                {"Xe lăn", "0", "14", "10"},
+                {"Xe đạp", "5", "10", "2.5"},
+                {"Mô tô", "7", "8", "2.5"},
+                {"Lamborghini", "1", "15", "1.5"},
+                {"F1", "5", "11", "1.5"}
         };
 
         // Gán TableLayout

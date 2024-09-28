@@ -11,11 +11,11 @@ public class CarDAO {
     private static List<Car> carList = new ArrayList<>();
 
     private CarDAO() {
-        carList.add(new Car(1, "Xe lăn", R.drawable.xe_lan, 5, 10, 5));
-        carList.add(new Car(2, "Xe đạp", R.drawable.xe_dap, 0.5, 5.5, 4));
-        carList.add(new Car(3, "Mô tô", R.drawable.mo_to, -3, 9, 6));
-        carList.add(new Car(4, "Lamborghini", R.drawable.lamborghini, 3, 3.5, 1));
-        carList.add(new Car(5, "F1", R.drawable.f1, 10, 50, 1.5));
+        carList.add(new Car(1, "Xe lăn", R.drawable.xe_lan, 0, 14, 10));
+        carList.add(new Car(2, "Xe đạp", R.drawable.xe_dap, 5, 10, 2.5));
+        carList.add(new Car(3, "Mô tô", R.drawable.mo_to, 7, 8, 2.5));
+        carList.add(new Car(4, "Lamborghini", R.drawable.lamborghini, 1, 15, 1.5));
+        carList.add(new Car(5, "F1", R.drawable.f1, 5, 11, 1.5));
     }
 
     public static CarDAO getInstance() {
