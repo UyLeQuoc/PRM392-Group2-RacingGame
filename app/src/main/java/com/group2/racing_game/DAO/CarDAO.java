@@ -15,7 +15,7 @@ public class CarDAO {
         carList.add(new Car(2, "Xe đạp", R.drawable.seekbar_thumb, 0.5, 5.5, 4));
         carList.add(new Car(3, "Mô tô", R.drawable.seekbar_thumb, -3, 9, 6));
         carList.add(new Car(4, "Lamborghini", R.drawable.seekbar_thumb, 3, 3.5, 1));
-        carList.add(new Car(5, "F1", R.drawable.seekbar_thumb, -50, 50, 1));
+        carList.add(new Car(5, "F1", R.drawable.seekbar_thumb, -25, 50, 1));
     }
 
     public static CarDAO getInstance() {

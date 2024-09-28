@@ -3,19 +3,32 @@ package com.group2.racing_game;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.group2.racing_game.DAO.BetHistoryDAO;
 import com.group2.racing_game.DAO.UserDAO;
+import com.group2.racing_game.DTO.BetHistoryAdapter;
+import com.group2.racing_game.entity.BetHistory;
+import com.group2.racing_game.entity.Car;
 import com.group2.racing_game.entity.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfilePageActivity extends AppCompatActivity {
     UserDAO userDAO = UserDAO.getInstance();
+    List<BetHistory> itemList = new ArrayList<>();
+    BetHistoryDAO historyDAO = BetHistoryDAO.getInstance();
+    ListView historyListView;
     EditText txtUsername, txtPassword, txtTotalCash;
     Button btnUpdate, btnBack;
+    BetHistoryAdapter betHistoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +44,12 @@ public class ProfilePageActivity extends AppCompatActivity {
             txtUsername.setText(currentUser.getUsername());
             txtPassword.setText(currentUser.getPassword());
             txtTotalCash.setText(String.valueOf(currentUser.getTotalCash()));
+        }
+
+        itemList = historyDAO.getBetHistoriesByUserId(currentUser.getId());
+        if(!itemList.isEmpty()){
+            betHistoryAdapter = new BetHistoryAdapter(this,R.layout.history_layout ,itemList);
+            historyListView.setAdapter(betHistoryAdapter);
         }
 
         // Xử lý sự kiện khi nhấn nút "Update"
@@ -50,6 +69,13 @@ public class ProfilePageActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        historyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
     }
 
     protected void RefElement() {
@@ -58,6 +84,7 @@ public class ProfilePageActivity extends AppCompatActivity {
         txtTotalCash = findViewById(R.id.txtTotalCash);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnBack = findViewById(R.id.btnBack);
+        historyListView = findViewById(R.id.historyListView);
     }
 
     // Phương thức để cập nhật thông tin người dùng
