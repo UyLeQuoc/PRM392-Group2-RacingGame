@@ -218,6 +218,10 @@ public class MainActivity extends AppCompatActivity {
         if (!raceRunning) {
             btnStart.setEnabled(false);
             btnReset.setEnabled(false);
+            btnProfile.setEnabled(false);
+            btnLogout.setEnabled(false);
+            btnDeposit.setEnabled(false);
+            btnShowRules.setEnabled(false);
             raceRunning = true;
             updateSeekBarProgress();
         }
@@ -256,6 +260,10 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     raceRunning = false;
                     btnReset.setEnabled(true);
+                    btnProfile.setEnabled(true);
+                    btnLogout.setEnabled(true);
+                    btnDeposit.setEnabled(true);
+                    btnShowRules.setEnabled(true);
                     calculateWinnings();
                 }
             }

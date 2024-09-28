@@ -1,23 +1,27 @@
 package com.group2.racing_game;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class RulePageActivity extends AppCompatActivity {
-    Button buttonBackToMain;
+    ImageButton buttonBackToMain;
     TextView tvRules;
     TableLayout tblVehicleInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rule_page);  // Gắn layout cho activity
+
         buttonBackToMain = findViewById(R.id.button_back_to_main);
         buttonBackToMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,6 +31,15 @@ public class RulePageActivity extends AppCompatActivity {
                 finish(); // Kết thúc activity hiện tại nếu không muốn quay lại
             }
         });
+
+        // Mảng chứa ID hình ảnh xe
+        int[] vehicleImages = {
+                R.drawable.xe_lan,
+                R.drawable.xe_dap,
+                R.drawable.mo_to,
+                R.drawable.lamborghini,
+                R.drawable.f1
+        };
 
         // Mảng chứa thông tin xe
         String[][] vehicleInfo = {
@@ -42,42 +55,48 @@ public class RulePageActivity extends AppCompatActivity {
 
         // Thêm tiêu đề cho bảng
         TableRow headerRow = new TableRow(this);
-        String[] headers = {"Car", "MinSpeed", "MaxSpeed", "Scale"};
+        String[] headers = {"Icon", "Car", "Min", "Max", "Rate"};
         for (String header : headers) {
             TextView tvHeader = new TextView(this);
             tvHeader.setText(header);
-            tvHeader.setPadding(10, 10, 10, 10);
-            headerRow.addView(tvHeader);
+            tvHeader.setPadding(0, 10, 80, 10);
             tvHeader.setTextColor(Color.WHITE);
             tvHeader.setTextSize(18); // Thiết lập kích thước văn bản là 18sp
-
+            headerRow.addView(tvHeader);
         }
         tblVehicleInfo.addView(headerRow);
 
         // Thêm các dòng dữ liệu vào bảng
-        for (String[] vehicle : vehicleInfo) {
+        for (int i = 0; i < vehicleInfo.length; i++) {
             TableRow row = new TableRow(this);
-            for (String data : vehicle) {
+
+            // Thêm hình ảnh vào hàng
+            ImageView imageView = new ImageView(this);
+            imageView.setImageResource(vehicleImages[i]);
+            imageView.setPadding(-40, 10, 10, 10);
+            row.addView(imageView);
+
+            // Thêm thông tin xe vào hàng
+            for (String data : vehicleInfo[i]) {
                 TextView tvData = new TextView(this);
                 tvData.setText(data);
-                tvData.setPadding(10, 10, 10, 10);
-                row.addView(tvData);
+                tvData.setPadding(0, 52, 80, 10);
                 tvData.setTextColor(Color.WHITE);
                 tvData.setTextSize(18);
+                row.addView(tvData);
             }
             tblVehicleInfo.addView(row);
         }
 
         // Mảng chứa các luật
         String[] rules = {
-                "Trước khi cuộc đua bắt đầu, người chơi sẽ được lựa chọn giữa nhiều chiếc xe để đặt cược.",
-                "Người chơi sẽ đặt cược một số tiền ảo vào chiếc xe mà họ cho rằng sẽ về đích đầu tiên.",
-                "Người chơi sẽ thắng cược nếu chiếc xe mà họ chọn về đích đầu tiên.",
-                "Cuộc đua sẽ diễn ra tự động, người chơi không có khả năng can thiệp vào kết quả cuộc đua sau khi đã đặt cược.",
-                "Sau khi thời gian đặt cược kết thúc, không ai có thể thay đổi lựa chọn của mình và cuộc đua sẽ diễn ra.",
-                "Cuộc đua kết thúc khi tất cả các xe đã về đích hoặc khi xe chiến thắng được xác định.",
+                "Trước khi cuộc đua bắt đầu, người chơi sẽ được lựa chọn giữa nhiều chiếc xe để đặt cược.\n",
+                "Người chơi sẽ đặt cược một số tiền ảo vào chiếc xe mà họ cho rằng sẽ về đích đầu tiên.\n",
+                "Người chơi sẽ thắng cược nếu chiếc xe mà họ chọn về đích đầu tiên.\n",
+                "Cuộc đua sẽ diễn ra tự động, người chơi không có khả năng can thiệp vào kết quả cuộc đua sau khi đã đặt cược.\n",
+                "Sau khi thời gian đặt cược kết thúc, không ai có thể thay đổi lựa chọn của mình và cuộc đua sẽ diễn ra.\n",
+                "Cuộc đua kết thúc khi tất cả các xe đã về đích hoặc khi xe chiến thắng được xác định.\n",
                 "Số tiền sẽ được cộng vào tài khoản của người chơi thắng cược, và những người thua sẽ mất số tiền đã cược.",
-
         };
 
         // Gán TextView

@@ -7,7 +7,6 @@
     android:background="@drawable/main_background"
     tools:context=".MainActivity">
 
-
     <SeekBar
         android:id="@+id/seekBar1"
         android:layout_width="300dp"
@@ -25,10 +24,9 @@
 
     <EditText
         android:id="@+id/editTextNumber1"
-        android:layout_width="108dp"
+        android:layout_width="80dp"
         android:layout_height="48dp"
-        android:layout_marginLeft="8dp"
-        android:hint="Bet amount"
+        android:hint="Amount"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -51,10 +49,9 @@
 
     <EditText
         android:id="@+id/editTextNumber2"
-        android:layout_width="108dp"
+        android:layout_width="80dp"
         android:layout_height="48dp"
-        android:layout_marginLeft="8dp"
-        android:hint="Bet amount"
+        android:hint="Amount"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -77,10 +74,9 @@
 
     <EditText
         android:id="@+id/editTextNumber3"
-        android:layout_width="108dp"
+        android:layout_width="80dp"
         android:layout_height="48dp"
-        android:layout_marginLeft="8dp"
-        android:hint="Bet amount"
+        android:hint="Amount"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -103,10 +99,9 @@
 
     <EditText
         android:id="@+id/editTextNumber4"
-        android:layout_width="108dp"
+        android:layout_width="80dp"
         android:layout_height="48dp"
-        android:layout_marginLeft="8dp"
-        android:hint="Bet amount"
+        android:hint="Amount"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -129,10 +124,9 @@
 
     <EditText
         android:id="@+id/editTextNumber5"
-        android:layout_width="108dp"
+        android:layout_width="80dp"
         android:layout_height="48dp"
-        android:layout_marginLeft="8dp"
-        android:hint="Bet amount"
+        android:hint="Amount"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -225,7 +219,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/racing_text" />
 
-
     <Button
         android:id="@+id/btnProfile"
         android:layout_width="107dp"
@@ -235,5 +228,4 @@
         android:text="Profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
