@@ -11,7 +11,7 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ROLES RACING"
+        android:text="RACING RULES"
         android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
@@ -35,6 +35,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TableLayout
+                android:id="@+id/tbl_vehicle_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:showDividers="middle"
+                android:divider="@color/white"
+                android:stretchColumns="1"
+
+                />
+
             <TextView
                 android:id="@+id/tv_rules"
                 android:layout_width="match_parent"
@@ -44,29 +54,21 @@
                 android:textSize="18sp"
                 />
 
-            <TableLayout
-                android:id="@+id/tbl_vehicle_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:stretchColumns="1"
-                android:padding="10dp"
-
-                />
         </LinearLayout>
 
 
     </ScrollView>
 
-    <Button
+    <ImageButton
         android:id="@+id/button_back_to_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quay về "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/back_icon"
         app:backgroundTint="@null"
-        android:background="@drawable/retangle_button_quangbui"
-      />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
